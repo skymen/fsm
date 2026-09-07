@@ -6,7 +6,7 @@ export const config = {
   params: [],
 };
 
-export const expose = false;
+export const expose = true;
 
 export default function () {
   return true;

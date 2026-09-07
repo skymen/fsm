@@ -8,12 +8,13 @@ import _version from "./version.js";
 export const addonType = ADDON_TYPE.BEHAVIOR;
 export const type = PLUGIN_TYPE.OBJECT;
 export const id = "skymen_fsm";
-export const name = "FSM";
+export const name = "Better FSM";
 export const version = _version;
 export const minConstructVersion = undefined;
 export const author = "skymen";
-export const website = "https://www.construct.net";
-export const documentation = "https://www.construct.net";
+export const website = "https://github.com/skymen/fsm";
+export const documentation =
+  "https://www.construct.net/en/make-games/addons/1701/better-fsm";
 export const description =
   "A simple finite state machine. Set a state, react to enter and exit triggers, and push or pop states on a stack.";
 export const category = ADDON_CATEGORY.GENERAL;

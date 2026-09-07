@@ -8,7 +8,7 @@ export const config = {
   params: [stateParam],
 };
 
-export const expose = false;
+export const expose = true;
 
 export default function (state) {
   return this.state === state;
