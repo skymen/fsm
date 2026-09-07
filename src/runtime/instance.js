@@ -29,22 +29,6 @@ export default function (parentClass) {
       this._trigger("OnAnyStateChange");
     }
 
-    changeState(next) {
-      if (next === this.state) return false;
-
-      this.exitingState = this.state;
-      this._trigger("OnStateExit");
-      this.exitingState = null;
-
-      this.previousState = this.state;
-      this.state = next;
-      this.enterTime = this.runtime.gameTime;
-
-      this._trigger("OnStateEnter");
-      this._trigger("OnAnyStateChange");
-      return true;
-    }
-
     _trigger(method) {
       this.dispatch(method);
       super._trigger(self.C3[AddonTypeMap[addonType]][id].Cnds[method]);
@@ -60,7 +44,7 @@ export default function (parentClass) {
     off(tag, callback) {
       if (this.events[tag]) {
         this.events[tag] = this.events[tag].filter(
-          (event) => event.callback !== callback
+          (event) => event.callback !== callback,
         );
       }
     }
@@ -90,7 +74,7 @@ export default function (parentClass) {
             {
               name: "State",
               value: this.state,
-              onedit: (v) => this.changeState(String(v)),
+              onedit: (v) => this.SetState(String(v)),
             },
             { name: "Previous state", value: this.previousState },
             {
