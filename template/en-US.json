@@ -1,117 +1,138 @@
 {
   "languageTag": "en-US",
-  "fileDescription": "Strings for sample_addon.",
+  "fileDescription": "Strings for skymen_fsm.",
   "text": {
-    "plugins": {
-      "sample_addon": {
-        "name": "Sample Addon",
-        "description": "Description",
+    "behaviors": {
+      "skymen_fsm": {
+        "name": "FSM",
+        "description": "A simple finite state machine. Set a state, react to enter and exit triggers, and push or pop states on a stack.",
         "help-url": "https://www.construct.net",
         "aceCategories": {
-          "Ace_Folders_In_Category_Folder": "Ace_Folders_In_Category_Folder",
-          "Aces_Files_In_Category_Folder": "Aces_Files_In_Category_Folder",
-          "Aces_In_Single_File": "Aces_In_Single_File"
+          "stack": "Stack",
+          "state": "State"
         },
-        "properties": {},
+        "properties": {
+          "initialState": {
+            "name": "Initial state",
+            "desc": "The state the instance starts in."
+          },
+          "triggerInitial": {
+            "name": "Trigger initial state",
+            "desc": "Fire 'On state enter' for the initial state on the first tick after the instance is created."
+          }
+        },
         "actions": {
-          "ActionCombo": {
-            "list-name": "Sample Action Combo",
-            "display-text": "Sample Action Combo {0}",
-            "description": "This is a sample action",
-            "params": {
-              "param1": {
-                "name": "Param1",
-                "desc": "This is a sample param",
-                "items": {
-                  "test": "test",
-                  "test2": "test2"
-                }
-              }
-            }
-          },
-          "Action": {
-            "list-name": "Sample Action",
-            "display-text": "Sample Action {0}",
-            "description": "This is a sample action",
-            "params": {
-              "param1": {
-                "name": "Param1",
-                "desc": "This is a sample param"
-              }
-            }
-          },
-          "AsyncAction": {
-            "list-name": "Sample Action Async",
-            "display-text": "Sample Action Async",
-            "description": "This is a sample action",
+          "ClearStack": {
+            "list-name": "Clear stack",
+            "display-text": "{my}: Clear state stack",
+            "description": "Remove every state from the stack. The current state is not changed.",
             "params": {}
           },
-          "SampleAction": {
-            "list-name": "Sample Action",
-            "display-text": "Sample Action {0}",
-            "description": "This is a sample action",
+          "PopState": {
+            "list-name": "Pop state",
+            "display-text": "{my}: Pop state",
+            "description": "Switch back to the most recently pushed state and remove it from the stack. Does nothing if the stack is empty.",
+            "params": {}
+          },
+          "PushState": {
+            "list-name": "Push state",
+            "display-text": "{my}: Push state [i]{0}[/i]",
+            "description": "Remember the current state on the stack, then switch to the given state.",
             "params": {
-              "param1": {
-                "name": "Param1",
-                "desc": "This is a sample param"
+              "state": {
+                "name": "State",
+                "desc": "The state name."
+              }
+            }
+          },
+          "SetState": {
+            "list-name": "Set state",
+            "display-text": "{my}: Set state to [i]{0}[/i]",
+            "description": "Switch to a state. Does nothing if it is already the current state.",
+            "params": {
+              "state": {
+                "name": "State",
+                "desc": "The state name."
               }
             }
           }
         },
         "conditions": {
-          "ConditionCombo": {
-            "list-name": "Sample Condition",
-            "display-text": "Sample Condition {0}",
-            "description": "This is a sample condition",
+          "IsStackEmpty": {
+            "list-name": "Is stack empty",
+            "display-text": "{my}: Is state stack empty",
+            "description": "True if no states have been pushed.",
+            "params": {}
+          },
+          "IsInState": {
+            "list-name": "Is in state",
+            "display-text": "{my}: Is in state [i]{0}[/i]",
+            "description": "True if the current state matches.",
             "params": {
-              "param1": {
-                "name": "Param1",
-                "desc": "This is a sample param",
-                "items": {
-                  "TRUE": "True",
-                  "FALSE": "False"
-                }
+              "state": {
+                "name": "State",
+                "desc": "The state name."
               }
             }
           },
-          "Condition": {
-            "list-name": "Sample Condition",
-            "display-text": "Sample Condition {0}",
-            "description": "This is a sample condition",
+          "OnAnyStateChange": {
+            "list-name": "On any state change",
+            "display-text": "{my}: On any state change",
+            "description": "Triggered after the instance enters any state.",
+            "params": {}
+          },
+          "OnStateEnter": {
+            "list-name": "On state enter",
+            "display-text": "{my}: On enter [i]{0}[/i]",
+            "description": "Triggered after the instance enters a state.",
             "params": {
-              "param1": {
-                "name": "Param1",
-                "desc": "This is a sample param"
+              "state": {
+                "name": "State",
+                "desc": "The state name."
               }
             }
           },
-          "Trigger": {
-            "list-name": "Sample Trigger",
-            "display-text": "Sample Trigger",
-            "description": "This is a sample trigger",
-            "params": {}
-          },
-          "SampleCondition": {
-            "list-name": "Sample Condition",
-            "display-text": "Sample Condition",
-            "description": "This is a sample condition",
-            "params": {}
+          "OnStateExit": {
+            "list-name": "On state exit",
+            "display-text": "{my}: On exit [i]{0}[/i]",
+            "description": "Triggered just before the instance leaves a state. CurrentState still returns the state being left.",
+            "params": {
+              "state": {
+                "name": "State",
+                "desc": "The state name."
+              }
+            }
           }
         },
         "expressions": {
-          "Expression2": {
-            "translated-name": "Expression2",
-            "description": "Sample Expression",
+          "StackSize": {
+            "translated-name": "StackSize",
+            "description": "Number of states on the stack.",
             "params": {}
           },
-          "Expression": {
-            "translated-name": "Expression",
-            "description": "Sample Expression",
+          "StackState": {
+            "translated-name": "StackState",
+            "description": "The state at the given stack index. 0 is the bottom of the stack. Returns an empty string if the index is out of range.",
+            "params": {
+              "index": {
+                "name": "Index",
+                "desc": "Stack index, 0 is the bottom."
+              }
+            }
+          },
+          "CurrentState": {
+            "translated-name": "CurrentState",
+            "description": "The current state.",
             "params": {}
           },
-          "SampleExpression": {
-            "translated-name": "SampleExpression",
-            "description": "This is a sample expression",
+          "PreviousState": {
+            "translated-name": "PreviousState",
+            "description": "The state before the current one. Empty if there was none.",
+            "params": {}
+          },
+          "TimeInState": {
+            "translated-name": "TimeInState",
+            "description": "Seconds of game time spent in the current state.",
             "params": {}
           }
         }

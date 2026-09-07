@@ -1,13 +1,11 @@
 export const config = {
-  highlight: false,
-  isDeprecated: false,
   returnType: "number",
-  description: "Sample Expression",
+  description: "Number of states on the stack.",
   params: [],
 };
 
 export const expose = false;
 
 export default function () {
-  return 1002;
+  return this.stack.length;
 }

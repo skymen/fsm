@@ -1,6 +1,6 @@
 {
-  "0.0.0.0": {
-    "added": "Initial release.",
+  "1.0.0.0": {
+    "added": "First release: set state, enter/exit/change triggers, is-in-state, state stack, state and timing expressions.",
     "changed": "",
     "fixed": ""
   }

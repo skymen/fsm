@@ -6,8 +6,43 @@ export default function (parentClass) {
     constructor() {
       super();
       const properties = this._getInitProperties();
-      if (properties) {
+      const initialState = properties ? properties[0] : "";
+      const triggerInitial = properties ? !!properties[1] : false;
+
+      this.state = initialState;
+      this.previousState = "";
+      this.exitingState = null;
+      this.stack = [];
+      this.enterTime = this.runtime.gameTime;
+
+      this.pendingInitialTrigger = triggerInitial;
+      if (this.pendingInitialTrigger) {
+        this._setTicking(true);
       }
+    }
+
+    _tick() {
+      if (!this.pendingInitialTrigger) return;
+      this.pendingInitialTrigger = false;
+      this._setTicking(false);
+      this._trigger("OnStateEnter");
+      this._trigger("OnAnyStateChange");
+    }
+
+    changeState(next) {
+      if (next === this.state) return false;
+
+      this.exitingState = this.state;
+      this._trigger("OnStateExit");
+      this.exitingState = null;
+
+      this.previousState = this.state;
+      this.state = next;
+      this.enterTime = this.runtime.gameTime;
+
+      this._trigger("OnStateEnter");
+      this._trigger("OnAnyStateChange");
+      return true;
     }
 
     _trigger(method) {
@@ -47,18 +82,46 @@ export default function (parentClass) {
       }
     }
 
+    _getDebuggerProperties() {
+      return [
+        {
+          title: "FSM",
+          properties: [
+            {
+              name: "State",
+              value: this.state,
+              onedit: (v) => this.changeState(String(v)),
+            },
+            { name: "Previous state", value: this.previousState },
+            {
+              name: "Time in state",
+              value: this.runtime.gameTime - this.enterTime,
+            },
+            { name: "Stack", value: this.stack.join(" > ") },
+          ],
+        },
+      ];
+    }
+
     _release() {
       super._release();
     }
 
     _saveToJson() {
       return {
-        // data to be saved for savegames
+        s: this.state,
+        p: this.previousState,
+        t: this.enterTime,
+        k: this.stack.slice(),
       };
     }
 
     _loadFromJson(o) {
-      // load state for savegames
+      this.state = o.s;
+      this.previousState = o.p;
+      this.enterTime = o.t;
+      this.stack = Array.isArray(o.k) ? o.k.slice() : [];
+      this.pendingInitialTrigger = false;
     }
   };
 }
