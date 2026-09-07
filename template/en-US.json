@@ -4,9 +4,9 @@
   "text": {
     "behaviors": {
       "skymen_fsm": {
-        "name": "FSM",
+        "name": "Better FSM",
         "description": "A simple finite state machine. Set a state, react to enter and exit triggers, and push or pop states on a stack.",
-        "help-url": "https://www.construct.net",
+        "help-url": "https://www.construct.net/en/make-games/addons/1701/better-fsm",
         "aceCategories": {
           "stack": "Stack",
           "state": "State"

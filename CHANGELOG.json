@@ -3,5 +3,10 @@
     "added": "First release: set state, enter/exit/change triggers, is-in-state, state stack, state and timing expressions.",
     "changed": "",
     "fixed": ""
+  },
+  "1.0.1.0": {
+    "added": "",
+    "changed": "Properly exposed SetState to the scripting runtime\nMinor codebase adjustments",
+    "fixed": ""
   }
 }
