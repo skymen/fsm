@@ -45,6 +45,7 @@ npm run dev
 ## Examples Files
 | Description | Download |
 | --- | --- |
+| fsm-example | [<img src="https://placehold.co/120x30/4493f8/FFF?text=Download&font=montserrat" width="120"/>](https://github.com/skymen/fsm/raw/refs/heads/main/examples/fsm-example.c3p) |
 
 ---
 ## Properties
